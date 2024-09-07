@@ -1,0 +1,73 @@
+1.multiplication of 8 bit data 
+org 100h 
+num1 db 20h
+num2 db 30h
+mov al,num1
+mul num2
+mov bx,ax
+ mov cx, 4          
+
+next_nibble:
+    mov ax, bx         
+    and ax, 0F000h     
+    shr ax, 12        
+    
+    add ax, 30h        
+    cmp ax, 39h        
+    jle print_digit    
+    add ax, 7h         
+
+print_digit:
+    
+    mov dl, al         
+    mov ah, 02h        
+    int 21h            
+
+    
+    shl bx, 4         
+    loop next_nibble   
+
+    
+    mov ah, 4Ch
+    int 21h       
+  ret
+
+2.multiplication of 16 bit data
+org 100h           
+num1 db 0002h
+num2 db 0004h
+mov al,num1
+
+mul num2            
+
+
+mov bx, ax         
+
+
+mov cx, 4          
+
+print_nibble:
+   
+    mov al, bl        
+    shr al, 4          
+    and al, 0Fh        
+
+   
+    add al, 30h        
+    cmp al, 39h       
+    jle print_digit    
+    add al, 7h         
+
+print_digit:
+    mov dl, al         
+    mov ah, 02h        
+    int 21h            
+
+    
+    shl bx, 4          
+    loop print_nibble  
+
+
+mov ah, 4Ch        
+int 21h             
+ret
