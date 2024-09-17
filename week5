@@ -1,0 +1,77 @@
+1. Write an assembly language program to perform division of 8-bit data.
+
+org 100h          
+
+
+mov al, 08h       
+mov bl, 04h       
+
+
+xor ah, ah        
+div bl            
+
+
+mov bh, al        
+mov bl, ah        
+
+
+mov al, bh       
+call print_digit 
+
+mov al, bl        
+call print_digit 
+
+mov ah, 4Ch       
+int 21h           
+
+
+print_digit:
+    add al, '0'   
+    mov dl, al    
+    mov ah, 02h   
+    int 21h       
+    ret           
+
+2.16 bit data multiplication 
+
+org 100h
+
+mov ax, 0081h    
+mov bx, 0040h    
+xor dx, dx       
+div bx           
+
+mov cx, ax       
+mov bx, dx       
+
+mov ax, cx       
+call print_number
+
+mov ax, bx       
+call print_number
+
+mov ah, 4Ch      
+int 21h         
+
+print_number:
+    push ax      
+    xor cx, cx   
+    mov bx, 10   
+
+convert_loop:
+    xor dx, dx   
+    div bx       
+    push dx      
+    inc cx       
+    test ax, ax  
+    jnz convert_loop 
+
+print_loop:
+    pop dx       
+    add dl, '0'  
+    mov ah, 02h  
+    int 21h
+    loop print_loop 
+
+    pop ax       
+    ret
