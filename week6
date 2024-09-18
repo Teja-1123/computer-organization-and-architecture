@@ -1,0 +1,53 @@
+1 (a) Write a program in assembly language to print single character on screen.
+org 100h
+  mov ah,2
+  mov dl,"T"
+  int 21h
+  mov ah,4ch
+  int 21h  
+end
+
+(b) Write an assembly language program to convert an upper-case letter to the
+corresponding lower-case letter.
+org 100h
+mov ah, 1         
+int 21h            
+mov dl, al         
+add dl, 32         
+mov ah, 2          
+int 21h            
+mov ah, 4ch        
+int 21h  
+ret
+
+2. (a) Write a program in assembly language to print multiple characters on screen.
+
+org 100h
+  mov ah,2
+  mov dl,"S"
+  int 21h
+  
+   mov ah,2
+  mov dl,"R"
+  int 21h
+  
+   mov ah,2
+  mov dl,"M"
+  int 21h  
+  
+  mov ah,4ch 
+  int 21h  
+end
+(b) Write an assembly language program to convert a lower-case letter to the
+corresponding upper-case letter.
+org 100h
+mov ah, 1
+int 21h
+mov dl, al
+sub dl, 32         
+mov ah, 2
+int 21h
+mov ah, 4ch
+int 21h
+ret
+
