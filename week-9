@@ -1,0 +1,71 @@
+1. Write a program in assembly language to take two single-digit numbers as input and
+display whether they are equal or not
+
+ORG 100h
+
+
+start:
+    mov dx, offset msg_input1
+    mov ah, 09h
+    int 21h             
+
+    mov ah, 01h
+    int 21h              
+    mov bl, al          
+
+
+    mov dx, offset msg_output1
+    mov ah, 09h
+    int 21h
+    mov dl, bl
+    mov ah, 02h
+    int 21h
+
+
+    mov dx, offset msg_input2
+    mov ah, 09h
+    int 21h              
+
+    mov ah, 01h
+    int 21h             
+    mov cl, al           
+
+
+    mov dx, offset msg_output2
+    mov ah, 09h
+    int 21h
+    mov dl, cl
+    mov ah, 02h
+    int 21h
+
+
+    cmp bl, cl
+    je Equal            
+
+NotEqual:
+
+    mov dx, offset msg_not_equal
+    mov ah, 09h
+    int 21h
+    jmp endprogram
+
+Equal:
+
+    mov dx, offset msg_equal
+    mov ah, 09h
+    int 21h
+
+endprogram:
+    mov ah, 4Ch         
+    int 21h
+
+; Messages
+msg_input1 db "Enter first single-digit number (0-9): $"
+msg_output1 db 0Dh, 0Ah, "The first number is: $"
+msg_input2 db 0Dh, 0Ah, "Enter second single-digit number (0-9): $"
+msg_output2 db 0Dh, 0Ah, "The second number is: $"
+msg_equal db 0Dh, 0Ah, "The numbers are equal.$"
+msg_not_equal db 0Dh, 0Ah, "The numbers are not equal.$"
+
+2. Write a program in assembly language to check whether a single-digit number is odd or
+even.
