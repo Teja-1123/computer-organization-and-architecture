@@ -69,3 +69,44 @@ msg_not_equal db 0Dh, 0Ah, "The numbers are not equal.$"
 
 2. Write a program in assembly language to check whether a single-digit number is odd or
 even.
+ORG 100h
+
+
+MOV DX, OFFSET msg_input   
+MOV AH, 09h                 
+INT 21h                     
+
+
+MOV AH, 01h                 
+INT 21h                     
+SUB AL, '0'                
+MOV BL, AL                 
+
+
+MOV AH, 00h                 
+MOV AL, BL                 
+MOV CL, 02                  
+DIV CL                      
+
+CMP AH, 0                   
+JE EvenNumber               
+
+
+MOV DX, OFFSET msg_odd      
+MOV AH, 09h                 
+INT 21h                     
+JMP EndProgram              
+
+EvenNumber:
+
+MOV DX, OFFSET msg_even     
+MOV AH, 09h                 
+INT 21h                     
+
+EndProgram:
+MOV AH, 4Ch                 
+INT 21h                    
+
+msg_input  DB 'Enter a single-digit number: $'
+msg_even   DB 0Dh, 0Ah, 'The number is even.$'
+msg_odd    DB 0Dh, 0Ah, 'The number is odd.$'
